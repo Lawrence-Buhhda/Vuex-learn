@@ -13,7 +13,14 @@ const store = new Vuex.Store({
             {id: 111, name: 'kobe', age: 24},
             {id: 112, name: 'james', age: 30},
             {id: 113, name: 'curry', age: 9},
-        ]
+        ],
+        //这些属性(state中的)都会被加入到响应式系统中，而响应式系统会监听属性的变化，
+        //当属性发生变化时，会通知所有界面中用到该属性的地方，让界面发实刷新
+        info:{
+            name:'kobe',
+            age:40,
+            height:1.98
+        }
     },
     mutations: {
         //方法
@@ -30,6 +37,14 @@ const store = new Vuex.Store({
         },
         addStudent(state,stu){
             state.students.push(stu)
+        },
+        updateInfo(state){
+            // state.info.name='kuang'
+            // state.info['address']='LA'  非响应式
+            // Vue.set(state.info,'address','LA')  响应式
+
+            // delete state.info.age 非响应式
+            Vue.delete(state.info,'age')
         }
     },
     actions: {},

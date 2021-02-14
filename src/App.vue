@@ -15,6 +15,9 @@
     <h2>{{ $store.getters.more20stu }}</h2>
     <h2>{{$store.getters.more20stuLength}}</h2>
     <h2>{{$store.getters.moreAgeStu(12)}}</h2>
+    <h2>-------App内容:info对象的内容是否是响应式---------</h2>
+    <h2>{{$store.state.info}}</h2>
+    <button @click="updateInfo">修改信息</button>
     <h2>-------Hello Vuex内容---------</h2>
     <hello-vuex/>
   </div>
@@ -60,6 +63,9 @@ export default {
     addStudent(){
       const stu={id:114,name:'alan',age:99}
       this.$store.commit('addStudent',stu)
+    },
+    updateInfo(){
+      this.$store.commit('updateInfo')
     }
   }
 }
