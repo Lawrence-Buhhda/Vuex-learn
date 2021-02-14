@@ -23,6 +23,12 @@ const store = new Vuex.Store({
         decrement(state) {
             state.counter--
         },
+        incrementCount(state,count){
+            state.counter +=count
+        },
+        addStudent(state,stu){
+            state.students.push(stu)
+        }
     },
     actions: {},
     getters: {
@@ -39,7 +45,6 @@ const store = new Vuex.Store({
             return age => {
                 // return state.students.filter( s => s.age > age)
                 return state.students.filter( s => s.age > age)
-
             }
         }
     },
