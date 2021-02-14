@@ -23,8 +23,10 @@ const store = new Vuex.Store({
         decrement(state) {
             state.counter--
         },
-        incrementCount(state,count){
-            state.counter +=count
+        incrementCount(state,payload){
+            // console.log(count)
+            // state.counter +=count
+            state.counter += payload.counts
         },
         addStudent(state,stu){
             state.students.push(stu)
