@@ -39,15 +39,41 @@ const store = new Vuex.Store({
             state.students.push(stu)
         },
         updateInfo(state){
-            // state.info.name='kuang'
+            state.info.name='kuang'
+
+            //模拟异步操作 错误的代码：不能在这里进行异步操作
+            // setTimeout(()=>{
+            //     state.info.name='ying'
+            // },1000)
+
             // state.info['address']='LA'  非响应式
             // Vue.set(state.info,'address','LA')  响应式
 
             // delete state.info.age 非响应式
-            Vue.delete(state.info,'age')
+            // Vue.delete(state.info,'age')
         }
     },
-    actions: {},
+    actions: {
+        //context:上下文 不够优雅
+        // aUpdateInfo(context,payload){
+        //     setTimeout(()=>{
+        //         context.commit('updateInfo')
+        //         // payload()
+        //         console.log(payload.message);
+        //         payload.success()
+        //     },1000)
+        // }
+
+        aUpdateInfo(context,payload){
+            return new Promise((resolve) => {
+                    setTimeout(()=>{
+                        context.commit('updateInfo')
+                        console.log(payload);
+                        resolve('111')
+                    },1000)
+            })
+        }
+    },
     getters: {
         powerCounter(state) {
             return state.counter * state.counter
