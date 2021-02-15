@@ -5,6 +5,37 @@ import {INCREMENT} from './mutation-types'
 Vue.use(Vuex)
 
 //2.创建对象
+const moduleA ={
+    state:{
+        name:'zhangsan'
+    },
+    mutations:{
+        updateName(state,payload){
+            state.name = payload
+        }
+    },
+    actions:{
+            aUpdateName(context){
+                setTimeout(()=>{
+                    context.commit('updateName','wangwu')
+                },1000)
+        }
+    },
+    getters:{
+        fullname(state){
+            return state.name + '1111'
+        },
+        fullname2(state,getters){
+            return getters.fullname + '2222'
+        },
+        fullname3(state,getters,rootState){
+            //根的state中的count
+            return getters.fullname2+rootState.counter
+        }
+    }
+}
+
+//2.创建对象
 const store = new Vuex.Store({
     state: {
         counter: 1000,
@@ -91,8 +122,28 @@ const store = new Vuex.Store({
             }
         }
     },
-    modules: {}
+    modules: {
+        a:moduleA,
+        b:{
+            state:{},
+            mutations:{},
+            actions:{},
+            getters:{}
+        }
+    }
 })
 
 //3.导出store对象
 export default store
+
+//es6 对象的解构
+// const obj = {
+//     name:'why',
+//     age:18,
+//     height:1.88
+// }
+//
+// // const name = obj.name;
+//
+// const {name,age,height} = obj;  //按照名字分配
+// console.log(name)
